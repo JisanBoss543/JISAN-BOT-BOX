@@ -9,7 +9,7 @@ module.exports = {
   config: {
     name: "help",
     version: "1.17",
-    author: "MR.AYAN", //**orginal author fb I'd : https://m.me/NOOBS.DEVELOPER.AYAN **//
+    author: "MR.JISAN", //**orginal author fb I'd : https://m.me/NOOBS.DEVELOPER.AYAN **//
     countDown: 5,
     role: 0,
     shortDescription: {
@@ -34,7 +34,7 @@ module.exports = {
       const categories = {};
       let msg = "";
 
-      msg += `╔═══════════╗\n     𝗔𝗬𝗔𝗡-𝗕𝗢𝗧🌟\n╚═══════════╝`;
+      msg += `╔═══════════╗\n     𝗝𝗜𝗦𝗔𝗡-𝗕𝗢𝗧🌟\n╚═══════════╝`;
 
       for (const [name, value] of commands) {
           if (value.config.role > 1 && role < value.config.role) continue;
