@@ -1,15 +1,15 @@
-fs = require("fs-extra");
+const fs = require("fs-extra");
 const axios = require("axios");
 const path = require("path");
 const { getPrefix } = global.utils;
 const { commands, aliases } = global.GoatBot;
-const doNotDelete = "[ 𝗔 𝗥 𝗬 𝗔 𝗡 ]"; 
+const doNotDelete = "[ 🌟 | 𝗔𝗬𝗔𝗡-𝗕𝗢𝗧 ]";
 
 module.exports = {
   config: {
     name: "help",
     version: "1.17",
-    author: "Jisan",
+    author: "MR.AYAN", //**orginal author fb I'd : https://m.me/NOOBS.DEVELOPER.AYAN **//
     countDown: 5,
     role: 0,
     shortDescription: {
@@ -26,54 +26,62 @@ module.exports = {
   },
 
   onStart: async function ({ message, args, event, threadsData, role }) {
-    const { threadID } = event;
-    const threadData = await threadsData.get(threadID);
-    const prefix = getPrefix(threadID);
+  const { threadID } = event;
+  const threadData = await threadsData.get(threadID);
+  const prefix = getPrefix(threadID);
 
-    if (args.length === 0) {
+  if (args.length === 0) {
       const categories = {};
-      let msg = "╭───────❁";
+      let msg = "";
 
-      msg += `\n│𝗝𝗜𝗦𝗔𝗡 𝗛𝗘𝗟𝗣 𝗟𝗜𝗦𝗧\n╰────────────❁`; 
+      msg += `╔═══════════╗\n     𝗔𝗬𝗔𝗡-𝗕𝗢𝗧🌟\n╚═══════════╝`;
 
       for (const [name, value] of commands) {
-        if (value.config.role > 1 && role < value.config.role) continue;
+          if (value.config.role > 1 && role < value.config.role) continue;
 
-        const category = value.config.category || "Uncategorized";
-        categories[category] = categories[category] || { commands: [] };
-        categories[category].commands.push(name);
+          const category = value.config.category || "Uncategorized";
+          categories[category] = categories[category] || { commands: [] };
+          categories[category].commands.push(name);
       }
 
-      Object.keys(categories).forEach((category) => {
-        if (category !== "info") {
-          msg += `\n╭─────✰『  ${category.toUpperCase()}  』`;
+      Object.keys(categories).forEach(category => {
+          if (category !== "info") {
+              msg += `\n╭─╮\n│『 ${category.toUpperCase()} 』`;
 
+              const names = categories[category].commands.sort();
+              for (let i = 0; i < names.length; i += 3) {
+                  const cmds = names.slice(i, i + 3).map(item => `✧${item}`);
+                  msg += `\n│${cmds.join(" ".repeat(Math.max(1, 10 - cmds.join("").length)))}`;
+              }
 
-          const names = categories[category].commands.sort();
-          for (let i = 0; i < names.length; i += 3) {
-            const cmds = names.slice(i, i + 2).map((item) => `⭔${item}`);
-            msg += `\n│${cmds.join(" ".repeat(Math.max(1, 5 - cmds.join("").length)))}`;
+              msg += `\n╰────────────ꔪ`;
           }
-
-          msg += `\n╰────────────✰`;
-        }
       });
 
       const totalCommands = commands.size;
-      msg += `\n\n╭─────✰[𝗘𝗡𝗝𝗢𝗬]\n│>𝗧𝗢𝗧𝗔𝗟 𝗖𝗠𝗗𝗦: [${totalCommands}].\n│𝗧𝗬𝗣𝗘𝖳:[ ${prefix}𝗛𝗘𝗟𝗣 𝗧𝗢\n│<𝗖𝗠𝗗> 𝗧𝗢 𝗟𝗘𝗔𝗥𝗡 𝗧𝗛𝗘 𝗨𝗦𝗔𝗚𝗘.]\n╰────────────✰`;
-      msg += ``;
-      msg += `\n╭─────✰\n│ ♥︎╣[❉𝗝 𝗜 𝗦 𝗔 𝗡❉]╠♥︎\n╰────────────✰`; 
+      msg += `\n𝗖𝘂𝗿𝗿𝗲𝗻𝘁𝗹𝘆, 𝘁𝗵𝗲 𝗯𝗼𝘁 𝗵𝗮𝘀 ${totalCommands} 𝗰𝗼𝗺𝗺𝗮𝗻𝗱𝘀 𝘁𝗵𝗮𝘁 𝗰𝗮𝗻 𝗯𝗲 𝘂𝘀𝗲𝗱\n`;
+      msg += `𝗧𝘆𝗽𝗲 ${prefix}𝗵𝗲𝗹𝗽 [𝗔𝗬𝗔𝗡-𝗕𝗢𝗧] 𝘁𝗼 𝘃𝗶𝗲𝘄 𝘁𝗵𝗲 𝗱𝗲𝘁𝗮𝗶𝗹𝘀 𝗼𝗳 𝘁𝗵𝗮𝘁 𝗰𝗼𝗺𝗺𝗮𝗻𝗱\n`;
+      msg += `🌟 | 𝗔𝗬𝗔𝗡-𝗕𝗢𝗧 `;
 
- 				const helpListImages = [ "https://i.imgur.com/mlZCfpg.jpeg" ];
+
+      const helpListImages = [
+        "https://i.postimg.cc/8cvDpt37/images-17.jpg", // add image link here
+        "https://i.postimg.cc/qq2VVghn/received-430815183006013.jpg",
+        "https://i.postimg.cc/KzRxVZDr/received-455361183700405.jpg",
+        "https://i.postimg.cc/MGZW70cL/received-435752262736007.jpg",
+        "https://i.postimg.cc/Pq6d2LY5/received-3200033873462285.jpg",
+        // Add more image links as needed
+      ];
 
 
       const helpListImage = helpListImages[Math.floor(Math.random() * helpListImages.length)];
 
+
       await message.reply({
-        body: msg,
-        attachment: await global.utils.getStreamFromURL(helpListImage)
+          body: msg,
+          attachment: await global.utils.getStreamFromURL(helpListImage)
       });
-    } else {
+  } else {
       const commandName = args[0].toLowerCase();
       const command = commands.get(commandName) || commands.get(aliases.get(commandName));
 
@@ -89,17 +97,24 @@ module.exports = {
         const guideBody = configCommand.guide?.en || "No guide available.";
         const usage = guideBody.replace(/{p}/g, prefix).replace(/{n}/g, configCommand.name);
 
-        const response = `
-  ╭───⊙
-  │ 🔶 ${configCommand.name}
-  ├── INFO
-  │ 📝 𝗗𝗲𝘀𝗰𝗿𝗶𝗽𝘁𝗶𝗼𝗻: ${longDescription}
-  │ 👑 𝗔𝘂𝘁𝗵𝗼𝗿: ${author}
-  │ ⚙ 𝗚𝘂𝗶𝗱𝗲: ${usage}
-  ├── USAGE
-  │ 🔯 𝗩𝗲𝗿𝘀𝗶𝗼𝗻: ${configCommand.version || "1.0"}
-  │ ♻𝗥𝗼𝗹𝗲: ${roleText}
-  ╰────────────⊙`;
+        const response = `━━━━━━━━━━━━━━━━━♡
+   
+   ➢  ♡𝐍𝐀𝐌𝐄♡ 
+    ➠${configCommand.name}
+   ➢ 𝙄𝙉𝙁𝙊
+    
+     ➠𝗗𝗲𝘀𝗰𝗿𝗶𝗽𝘁𝗶𝗼𝗻 : ${longDescription}
+     ➠𝗼𝘁𝗵𝗲𝗿 𝗻𝗮𝗺𝗲𝘀 : ${configCommand.aliases ? configCommand.aliases.join(", ") : "Do not have"}
+    Other names in your group:  Do not have
+     ➠𝗔𝘂𝘁𝗵𝗼𝗿: ${author}
+     ➠𝗩𝗲𝗿𝘀𝗶𝗼𝗻 : ${configCommand.version || "1.0"}
+     ➠𝗥𝗼𝗹𝗲 : ${roleText}
+     ➠𝗧𝗶𝗺𝗲 𝗽𝗲𝗿 𝗰𝗼𝗺𝗺𝗮𝗱: ${configCommand.countDown || 1}s
+   ➢ 𝙐𝙎𝘼𝙂𝙀
+     ➠ ${usage}
+   ➢ 𝙉𝙊𝙏𝙀𝙎
+    scripts coding by MR.AYAN
+  ━━━━━━━━━━━━━━━━━━ꔪ`;
 
         await message.reply(response);
       }
