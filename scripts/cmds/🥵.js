@@ -1,6 +1,6 @@
 module.exports = {
  config: {
-	 name: "😘",
+	 name: "🥵",
 	 version: "1.0",
 	 author: "Jisan",
 	 countDown: 5,
@@ -12,10 +12,10 @@ module.exports = {
 
  onStart: async function(){}, 
  onChat: async function({ event, message, getLang }) {
- if (event.body && event.body.toLowerCase() === "😘") {
+ if (event.body && event.body.toLowerCase() === "🥵") {
  return message.reply({
  body: "     「𝗕𝗢𝗧 𝗢𝗪𝗡𝗘𝗥\n𝙅𝙄𝙎𝘼𝙉」",
- attachment: await global.utils.getStreamFromURL("https://drive.google.com/uc?id=17jrnlOiGbGQn-DziZUeEf7wZBubIOBD8")
+ attachment: await global.utils.getStreamFromURL("https://drive.google.com/uc?id=1A2QEh82dD2CtXET7KiZBC0GxKNhjOsrr")
  });
  }
  }
